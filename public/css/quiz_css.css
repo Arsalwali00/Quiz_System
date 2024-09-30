@@ -1,0 +1,119 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url(/images/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+    color: #333; /* Changed text color to black */
+}
+
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    animation: zoomIn 1s ease-out;
+}
+
+h1#quizTitle {
+    font-size: 1.5em; /* Smaller font size for the quiz title */
+    margin-bottom: 20px;
+    color: black; /* Ensure the title is black */
+}
+
+/* Quiz Form */
+form#quizForm {
+    text-align: left;
+    margin-bottom: 20px;
+    color: black; /* Form text should be black */
+}
+
+.question {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.question h3 {
+    font-size: 1.5em;
+    color: black;
+    margin-bottom: 10px;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Submit Button */
+button#submitBtn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 20px; /* Moved to the bottom */
+}
+
+button#submitBtn:hover {
+    background: linear-gradient(45deg, #2575fc, #6a11cb);
+    transform: scale(1.05);
+}
+
+button#submitBtn:active {
+    animation: pulse 0.5s;
+}
+
+/* Animations */
+@keyframes zoomIn {
+    0% { transform: scale(0.8); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%;
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    button {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    button {
+        font-size: 1em;
+    }
+}

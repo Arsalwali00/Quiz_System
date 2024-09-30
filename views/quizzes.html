@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/quizzes_css.css">
+  <title>Available Quizzes</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Available Quizzes</h1>
+    
+    <!-- Form container for quizzes and buttons -->
+    <form id="quizForm">
+      <ul id="quizList"></ul> <!-- Dynamic Quiz List -->
+
+      <!-- Logout Button -->
+      <div class="additional-buttons">
+        <button id="logoutBtn" type="button" onclick="logout()">Logout</button>
+      </div>
+    </form>
+
+    <p id="message"></p>
+  </div>
+
+  <script>
+    // Fetch the JWT token from localStorage
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      document.getElementById('message').innerText = 'Please log in to view quizzes.';
+      window.location.href = '/login.html';  // Redirect to login if not authenticated
+    } else {
+      // Fetch all quizzes
+      fetch('/api/quiz/all', {
+        headers: {
+          'Authorization': token  // Send the JWT token in the headers
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        const quizList = document.getElementById('quizList');
+        data.forEach(quiz => {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `<a href="/quiz.html?id=${quiz.id}" class="quiz-link">${quiz.title}</a>`;
+          quizList.appendChild(listItem);
+        });
+      })
+      .catch(error => {
+        document.getElementById('message').innerText = 'Error fetching quizzes.';
+        console.error('Error:', error);
+      });
+    }
+
+    // Logout function to clear the token and redirect
+    function logout() {
+      localStorage.removeItem('token');
+      window.location.href = '/login.html';
+    }
+  </script>
+</body>
+</html>

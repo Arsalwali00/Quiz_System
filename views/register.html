@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/register_css.css">
+  <title>Register</title>
+</head>
+<body>
+  <div class="container"> <!-- Wrapped everything inside a container -->
+    <h1>Register</h1>
+    <form id="registerForm">
+      <input type="text" id="name" placeholder="Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Register</button>
+      <a href="/login.html">Already have an account? Login</a> <!-- Moved the link directly below the button -->
+    </form>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      fetch('/api/quiz/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.token) {
+          localStorage.setItem('token', data.token);  // Store JWT token
+          document.getElementById('message').innerText = 'Registration successful!';
+          window.location.href = '/quizzes.html';  // Redirect to quiz list page
+        } else {
+          document.getElementById('message').innerText = 'Registration failed. Try again.';
+        }
+      })
+      .catch(error => {
+        document.getElementById('message').innerText = 'An error occurred during registration.';
+        console.error('Error:', error);
+      });
+    });
+  </script>
+</body>
+</html>

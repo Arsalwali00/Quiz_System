@@ -1,0 +1,138 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url(/images/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+    animation: fadeIn 1.5s ease-in-out; /* Body fade-in animation */
+}
+
+/* Body Fade In */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    max-width: 450px;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    transform: scale(0.8);
+    animation: zoomIn 1s ease-out forwards, float 4s ease-in-out infinite; /* Zoom in and floating */
+}
+
+/* Container Zoom In */
+@keyframes zoomIn {
+    0% { transform: scale(0.8); }
+    100% { transform: scale(1); }
+}
+
+/* Floating Effect */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    animation: slideIn 1.2s ease-in-out forwards; /* Slide in header */
+}
+
+/* Header Slide In */
+@keyframes slideIn {
+    0% { transform: translateY(-50px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Navigation Menu */
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+nav .button {
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 30px;
+    font-size: 1.2em;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, transform 0.2s ease;
+    animation: glow 2s ease-in-out infinite alternate; /* Glowing animation */
+}
+
+nav .button:hover {
+    background: linear-gradient(45deg, #2575fc, #6a11cb);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Glowing Effect */
+@keyframes glow {
+    0% { box-shadow: 0 0 10px #6a11cb, 0 0 20px #6a11cb, 0 0 30px #2575fc; }
+    100% { box-shadow: 0 0 20px #6a11cb, 0 0 40px #2575fc, 0 0 60px #6a11cb; }
+}
+
+/* Button Click Pulse */
+nav .button:active {
+    animation: pulse 0.5s;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding: 25px;
+    }
+
+    nav .button {
+        font-size: 1em;
+        padding: 12px;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 480px) {
+    nav .button {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 1.6em;
+    }
+}

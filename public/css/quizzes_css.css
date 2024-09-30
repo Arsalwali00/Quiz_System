@@ -1,0 +1,238 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url(/images/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    padding-top: 50px;
+    color: #fff;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.container h1{
+
+    color: black;
+    font-size: 2.4rem;
+    margin-top: 60px;
+}
+
+
+
+.container {
+    text-align: center;
+    background: #6f6390d9; 
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    animation: zoomIn 1s ease-out;
+}
+
+/* Quiz List */
+ul#quizList {
+    list-style-type: none;
+    margin-bottom: 20px;
+    margin-top: 50px;
+}
+
+ul#quizList li {/* Global Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/1600x900/?education,quiz');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 100vh;
+        padding-top: 50px;
+        color: #fff;
+        animation: fadeIn 1.5s ease-in-out;
+    }
+    
+    .container {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.85);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        max-width: 600px;
+        width: 100%;
+        backdrop-filter: blur(10px);
+        animation: zoomIn 1s ease-out;
+    }
+    
+    /* Quiz List */
+    ul#quizList {
+        list-style-type: none;
+        margin-bottom: 20px;
+    }
+    
+    ul#quizList li {
+        margin-bottom: 10px;
+    }
+    
+    ul#quizList li a.quiz-link {
+        display: block;
+        padding: 15px;
+        background: linear-gradient(45deg, #ff6b6b, #ffcc00);  /* Same design as logout button */
+        color: black;  /* Changed color to black */
+        border-radius: 30px;
+        font-size: 1.2em;
+        text-decoration: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+    
+    ul#quizList li a.quiz-link:hover {
+        background: linear-gradient(45deg, #ffcc00, #ff6b6b);
+        transform: scale(1.05);
+    }
+    
+    ul#quizList li a.quiz-link:active {
+        animation: pulse 0.5s;
+    }
+    
+    /* Submit Button */
+    button#logoutBtn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(45deg, #ff6b6b, #ffcc00);
+        color: white;
+        border: none;
+        border-radius: 30px;
+        font-size: 1.2em;
+        cursor: pointer;
+        margin-top: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+    
+    button#logoutBtn:hover {
+        background: linear-gradient(45deg, #ffcc00, #ff6b6b);
+        transform: scale(1.05);
+    }
+    
+    button#logoutBtn:active {
+        animation: pulse 0.5s;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .container {
+            max-width: 90%;
+            padding: 30px;
+        }
+    
+        h1 {
+            font-size: 2em;
+        }
+    
+        button {
+            font-size: 1.1em;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 1.8em;
+        }
+    
+        button {
+            font-size: 1em;
+        }
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+    
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+ul#quizList li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2em;
+}
+
+/* Buttons Styling */
+.additional-buttons {
+    margin-top: 10px;
+}
+
+button#generalBtn, button#logoutBtn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(45deg, #ff6b6b, #ffcc00);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button#generalBtn:hover, button#logoutBtn:hover {
+    background: linear-gradient(45deg, #ffcc00, #ff6b6b);
+    transform: scale(1.05);
+}
+
+button#generalBtn:active, button#logoutBtn:active {
+    animation: pulse 0.5s;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%;
+        padding: 30px;
+    }
+
+    h1 {
+        
+        font-size: 2em;
+    }
+
+    button {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    button {
+        font-size: 1em;
+    }
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/quiz_css.css">
+  <title>Take Quiz</title>
+</head>
+<body>
+  <div class="container">
+    <h1 id="quizTitle">General Knowledge Quiz</h1>
+    <form id="quizForm"></form>
+    <p id="message"></p>
+    
+    <!-- Submit button placed at the bottom -->
+    <button id="submitBtn" type="submit">Next Question</button>
+  </div>
+
+  <script>
+    const quizForm = document.getElementById('quizForm');
+    const quizTitle = document.getElementById('quizTitle');
+    const submitBtn = document.getElementById('submitBtn');
+    let currentQuestionIndex = 0;
+    let answers = [];
+    let questions = [];
+
+    const params = new URLSearchParams(window.location.search);
+    const quizId = params.get('id');
+
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      document.getElementById('message').innerText = 'Please log in to take the quiz.';
+      window.location.href = '/login.html'; 
+    } else {
+      fetch(`/api/quiz/${quizId}`, {
+        headers: {
+          'Authorization': token
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        quizTitle.innerText = data.quiz.title;
+        questions = data.questions;
+
+        showQuestion(currentQuestionIndex);
+      })
+      .catch(error => {
+        document.getElementById('message').innerText = 'Error loading quiz.';
+        console.error('Error:', error);
+      });
+    }
+
+    function showQuestion(index) {
+      quizForm.innerHTML = '';  
+      const question = questions[index];
+
+      const questionDiv = document.createElement('div');
+      questionDiv.classList.add('question');
+      questionDiv.innerHTML = `<h3>${question.question_text}</h3>`;
+      
+      question.answers.forEach(answer => {
+        const answerOption = document.createElement('div');
+        answerOption.innerHTML = `
+          <input type="radio" name="question_${question.id}" value="${answer.id}" required> ${answer.answer_text}
+        `;
+        questionDiv.appendChild(answerOption);
+      });
+      
+      quizForm.appendChild(questionDiv);
+
+      if (index === questions.length - 1) {
+        submitBtn.innerText = 'Submit Quiz';
+      }
+    }
+
+    submitBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const selectedAnswer = quizForm.querySelector('input[type="radio"]:checked');
+      
+      if (!selectedAnswer) {
+        document.getElementById('message').innerText = 'Please select an answer.';
+        return;
+      }
+
+      const questionId = questions[currentQuestionIndex].id;
+      answers.push({
+        questionId: questionId,
+        answerId: parseInt(selectedAnswer.value)
+      });
+
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        showQuestion(currentQuestionIndex);  
+        document.getElementById('message').innerText = ''; 
+      } else {
+        submitQuiz();  
+      }
+    });
+
+    function submitQuiz() {
+      fetch('/api/quiz/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token
+        },
+        body: JSON.stringify({ quizId: quizId, answers })
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('message').innerText = `Quiz submitted! Your score: ${data.score}`;
+        submitBtn.disabled = true; 
+      })
+      .catch(error => {
+        document.getElementById('message').innerText = 'Error submitting quiz.';
+        console.error('Error:', error);
+      });
+    }
+  </script>
+</body>
+</html>
